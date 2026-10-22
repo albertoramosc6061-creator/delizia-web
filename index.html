@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delizia — Sistema de Gestión</title>
+  <meta name="description" content="Sistema de gestión empresarial Delizia Bolivia" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- SVG Icon Sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="ico-home"     viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V21H15v-6H9v6H3V9.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ico-info"     viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="16" r="1" fill="currentColor"/></symbol>
+    <symbol id="ico-admin"    viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7L2 9l7-1z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></symbol>
+    <symbol id="ico-users"    viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-user"     viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-supplier" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="12" x2="12" y2="16" stroke="currentColor" stroke-width="2"/><line x1="10" y1="14" x2="14" y2="14" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-product"  viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-category" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-order"    viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-log"      viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/><line x1="10" y1="9" x2="8" y2="9" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-edit"     viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-trash"    viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-image"    viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-upload"   viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="12" x2="12" y2="21" stroke="currentColor" stroke-width="2"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-chart"    viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" stroke="currentColor" stroke-width="2"/><line x1="12" y1="20" x2="12" y2="4"  stroke="currentColor" stroke-width="2"/><line x1="6"  y1="20" x2="6"  y2="14" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-bell"     viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-logout"   viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="16 17 21 12 16 7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-search"   viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-cow"      viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="8" ry="6" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="9"  cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="10" r="1.5" fill="currentColor"/><path d="M7 8C7 6 6 4 4 4M17 8C17 6 18 4 20 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M9 17c1 1 5 1 6 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="ico-plus"     viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="ico-profile"  viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-lock"     viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+  </svg>
+</head>
+<body>
+
+  <!-- ░░ SIDEBAR ░░ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.jpg" alt="Delizia" class="logo-img" />
+      <span class="logo-tagline">Sistema de Gestión</span>
+    </div>
+
+    <div class="sidebar-user" id="sidebarUser">
+      <div class="su-avatar" id="suAvatar">A</div>
+      <div class="su-info">
+        <span class="su-name" id="suName">Cargando...</span>
+        <span class="su-role" id="suRole">—</span>
+      </div>
+      <div class="su-dot"></div>
+    </div>
+
+    <!-- NAV ADMIN -->
+    <nav class="sidebar-nav" id="navAdmin">
+      <span class="nav-label">Principal</span>
+      <a href="#" class="nav-item active" data-section="dashboard">
+        <svg class="nav-icon"><use href="#ico-home"/></svg><span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-section="nosotros">
+        <svg class="nav-icon"><use href="#ico-cow"/></svg><span>Sobre Delizia</span>
+      </a>
+      <a href="#" class="nav-item" data-section="bitacora">
+        <svg class="nav-icon"><use href="#ico-log"/></svg><span>Bitácora</span>
+      </a>
+      <a href="#" class="nav-item" data-section="reportes">
+        <svg class="nav-icon"><use href="#ico-chart"/></svg><span>Informes</span>
+      </a>
+
+      <span class="nav-label">Gestión</span>
+      <a href="#" class="nav-item" data-section="administrador">
+        <svg class="nav-icon"><use href="#ico-admin"/></svg><span>Administradores</span>
+      </a>
+      <a href="#" class="nav-item" data-section="empleados">
+        <svg class="nav-icon"><use href="#ico-users"/></svg><span>Empleados</span>
+      </a>
+      <a href="#" class="nav-item" data-section="clientes">
+        <svg class="nav-icon"><use href="#ico-user"/></svg><span>Clientes</span>
+      </a>
+      <a href="#" class="nav-item" data-section="proveedores">
+        <svg class="nav-icon"><use href="#ico-supplier"/></svg><span>Proveedores</span>
+      </a>
+
+      <span class="nav-label">Catálogos</span>
+      <a href="#" class="nav-item" data-section="productos">
+        <svg class="nav-icon"><use href="#ico-product"/></svg><span>Productos</span>
+      </a>
+      <a href="#" class="nav-item" data-section="categorias">
+        <svg class="nav-icon"><use href="#ico-category"/></svg><span>Categorías</span>
+      </a>
+      <a href="#" class="nav-item" data-section="pedidos">
+        <svg class="nav-icon"><use href="#ico-order"/></svg><span>Pedidos</span>
+      </a>
+    </nav>
+
+    <!-- NAV EMPLEADO -->
+    <nav class="sidebar-nav" id="navEmpleado" style="display:none">
+      <span class="nav-label">Mi Panel</span>
+      <a href="#" class="nav-item active" data-section="emp-dashboard">
+        <svg class="nav-icon"><use href="#ico-home"/></svg><span>Inicio</span>
+      </a>
+      <a href="#" class="nav-item" data-section="emp-pedidos">
+        <svg class="nav-icon"><use href="#ico-order"/></svg><span>Pedidos</span>
+      </a>
+      <a href="#" class="nav-item" data-section="emp-productos">
+        <svg class="nav-icon"><use href="#ico-product"/></svg><span>Catálogo</span>
+      </a>
+      <a href="#" class="nav-item" data-section="emp-clientes">
+        <svg class="nav-icon"><use href="#ico-users"/></svg><span>Clientes</span>
+      </a>
+      <a href="#" class="nav-item" data-section="emp-perfil">
+        <svg class="nav-icon"><use href="#ico-profile"/></svg><span>Mi Perfil</span>
+      </a>
+    </nav>
+
+    <!-- NAV CLIENTE -->
+    <nav class="sidebar-nav" id="navCliente" style="display:none">
+      <span class="nav-label">Mi Cuenta</span>
+      <a href="#" class="nav-item active" data-section="cli-inicio">
+        <svg class="nav-icon"><use href="#ico-home"/></svg><span>Inicio</span>
+      </a>
+      <a href="#" class="nav-item" data-section="cli-catalogo">
+        <svg class="nav-icon"><use href="#ico-product"/></svg><span>Catálogo</span>
+      </a>
+      <a href="#" class="nav-item" data-section="cli-mispedidos">
+        <svg class="nav-icon"><use href="#ico-order"/></svg><span>Mis Pedidos</span>
+      </a>
+      <a href="#" class="nav-item" data-section="cli-perfil">
+        <svg class="nav-icon"><use href="#ico-profile"/></svg><span>Mi Perfil</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="logout()">
+        <svg width="16" height="16"><use href="#ico-logout"/></svg>
+        Cerrar sesión
+      </button>
+    </div>
+  </aside>
+
+  <!-- ░░ MAIN CONTENT ░░ -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="breadcrumb" id="breadcrumb">Delizia <span>/ Dashboard</span></div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-bar">
+          <svg width="16" height="16" class="search-icon"><use href="#ico-search"/></svg>
+          <input type="text" placeholder="Buscar..." id="searchInput" />
+        </div>
+        <div class="notif-bell" id="notifBell">
+          <svg width="18" height="18"><use href="#ico-bell"/></svg>
+          <span class="notif-dot"></span>
+        </div>
+        <span class="role-badge-top" id="topRoleBadge"></span>
+      </div>
+    </header>
+
+    <!-- ═══════ ADMIN DASHBOARD ═══════ -->
+    <section class="section active" id="section-dashboard">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Panel de Control</p>
+          <h1>Delizia<br /><em>Bolivia</em></h1>
+          <p class="hero-desc">La empresa láctea boliviana más querida. Calidad y sabor en cada producto.</p>
+          <a href="#" class="hero-btn" onclick="navigate('productos'); return false;">Ver Catálogo</a>
+        </div>
+        <div class="hero-orbs">
+          <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-icon-wrap kpi-ic-blue"><svg width="22" height="22"><use href="#ico-user"/></svg></div>
+          <div class="kpi-data"><span class="kpi-value" id="kpiClientes">0</span><span class="kpi-label">Clientes activos</span></div>
+          <div class="kpi-trend">+12%</div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-icon-wrap kpi-ic-red"><svg width="22" height="22"><use href="#ico-product"/></svg></div>
+          <div class="kpi-data"><span class="kpi-value" id="kpiProductos">0</span><span class="kpi-label">Productos</span></div>
+          <div class="kpi-trend">+5%</div>
+        </div>
+        <div class="kpi-card kpi-cyan">
+          <div class="kpi-icon-wrap kpi-ic-cyan"><svg width="22" height="22"><use href="#ico-supplier"/></svg></div>
+          <div class="kpi-data"><span class="kpi-value" id="kpiProveedores">0</span><span class="kpi-label">Proveedores</span></div>
+          <div class="kpi-trend">Estable</div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-icon-wrap kpi-ic-green"><svg width="22" height="22"><use href="#ico-order"/></svg></div>
+          <div class="kpi-data"><span class="kpi-value" id="kpiPedidos">0</span><span class="kpi-label">Pedidos activos</span></div>
+          <div class="kpi-trend">+23%</div>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="glass-card">
+          <div class="card-header"><h2 class="card-title">Actividad Reciente</h2><span class="card-badge">Hoy</span></div>
+          <div class="activity-list" id="activityList"></div>
+        </div>
+        <div class="glass-card">
+          <div class="card-header"><h2 class="card-title">Acciones Rápidas</h2></div>
+          <div class="quick-actions">
+            <button class="qa-btn qa-blue"  onclick="navigate('clientes')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-plus"/></svg></div><span>Nuevo Cliente</span></button>
+            <button class="qa-btn qa-red"   onclick="navigate('productos')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-plus"/></svg></div><span>Añadir Producto</span></button>
+            <button class="qa-btn qa-cyan"  onclick="navigate('pedidos')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-plus"/></svg></div><span>Nuevo Pedido</span></button>
+            <button class="qa-btn qa-green" onclick="navigate('proveedores')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-plus"/></svg></div><span>Proveedor</span></button>
+            <button class="qa-btn qa-blue"  onclick="navigate('empleados')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-plus"/></svg></div><span>Empleado</span></button>
+            <button class="qa-btn qa-red"   onclick="navigate('bitacora')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-log"/></svg></div><span>Bitácora</span></button>
+          </div>
+        </div>
+        <div class="glass-card chart-card">
+          <div class="card-header"><h2 class="card-title">Ventas mensuales (Bs.)</h2><span class="card-badge">2025</span></div>
+          <div class="bar-chart"><div class="bar-group">
+            <div class="bar" style="--h:55%;--c:var(--blue-300)"><span class="bar-label">Ene</span></div>
+            <div class="bar" style="--h:70%;--c:var(--blue-400)"><span class="bar-label">Feb</span></div>
+            <div class="bar" style="--h:62%;--c:var(--cyan-300)"><span class="bar-label">Mar</span></div>
+            <div class="bar" style="--h:80%;--c:var(--blue-500)"><span class="bar-label">Abr</span></div>
+            <div class="bar" style="--h:75%;--c:var(--red-300)"><span class="bar-label">May</span></div>
+            <div class="bar" style="--h:90%;--c:var(--blue-400)"><span class="bar-label">Jun</span></div>
+            <div class="bar" style="--h:85%;--c:var(--cyan-300)"><span class="bar-label">Jul</span></div>
+            <div class="bar" style="--h:95%;--c:var(--blue-500)"><span class="bar-label">Ago</span></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ SOBRE DELIZIA ═══════ -->
+    <section class="section" id="section-nosotros">
+      <div class="page-title"><h2>Sobre <em>Delizia</em></h2><p>La empresa láctea boliviana de mayor tradición</p></div>
+      <div class="about-hero">
+        <div class="about-logo-wrap"><img src="logo.jpg" alt="Delizia" class="about-logo" /></div>
+        <div class="about-text">
+          <h3>Sabor boliviano desde 2010</h3>
+          <p><strong>Delizia</strong> es una empresa boliviana dedicada a la producción y distribución de productos lácteos de la más alta calidad. Fundada en <strong>Santa Cruz de la Sierra</strong>, trabajamos con productores locales para llevar lo mejor del campo boliviano a tu mesa.</p>
+          <p>Desde leche entera hasta yogures, quesos y derivados, Delizia es sinónimo de <strong>sabor auténtico</strong> y calidad garantizada por SENASAG.</p>
+          <div class="about-tags">
+            <span class="tag tag-blue">100% Natural</span>
+            <span class="tag tag-blue">Hecho en Bolivia</span>
+            <span class="tag tag-blue">Sin conservantes</span>
+            <span class="tag tag-blue">Cert. SENASAG</span>
+          </div>
+        </div>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-admin"/></svg></div><h4>Misión</h4><p>Brindar productos lácteos de calidad superior, frescos y nutritivos, que fortalezcan la alimentación de las familias bolivianas.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-chart"/></svg></div><h4>Visión</h4><p>Ser la marca láctea líder en Bolivia y expandir nuestra presencia en toda Latinoamérica para el año 2030.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-lock"/></svg></div><h4>Valores</h4><p>Calidad · Frescura · Honestidad · Compromiso con Bolivia · Innovación · Sostenibilidad.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-users"/></svg></div><h4>Impacto</h4><p>+500 familias productoras, 9 departamentos cubiertos y 15 años de trayectoria en el mercado boliviano.</p></div>
+      </div>
+    </section>
+
+    <!-- ═══════ REPORTES ═══════ -->
+    <section class="section" id="section-reportes">
+      <div class="page-title"><h2>Informes y <em>Reportes</em></h2><p>Diagnóstico completo del sistema Delizia</p></div>
+      <div id="reportContainer"></div>
+    </section>
+
+    <!-- ═══════ BITÁCORA ═══════ -->
+    <section class="section" id="section-bitacora">
+      <div class="page-title"><h2>Bitácora de <em>Actividad</em></h2><p>Registro de cambios y eventos del sistema</p></div>
+      <!-- Filtros bitácora -->
+      <div class="table-toolbar">
+        <select class="tb-select" id="filtroBitacora" onchange="renderBitacora()">
+          <option value="">Todos los eventos</option>
+          <option value="producto">Productos</option>
+          <option value="cliente">Clientes</option>
+          <option value="pedido">Pedidos</option>
+          <option value="empleado">Empleados</option>
+          <option value="proveedor">Proveedores</option>
+        </select>
+        <button class="btn-danger" onclick="limpiarBitacora()">Limpiar bitácora</button>
+      </div>
+      <!-- Timeline -->
+      <div class="bitacora-timeline" id="bitacoraTimeline"></div>
+    </section>
+
+    <!-- ═══════ ADMINISTRADORES ═══════ -->
+    <section class="section" id="section-administrador">
+      <div class="page-title"><h2>Administradores</h2><p>Usuarios con acceso total al sistema</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar administrador..." data-target="tbl-admins" />
+        <button class="btn-primary" onclick="openModal('modalAdmin')">+ Nuevo Admin</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Nombre</th><th>Usuario / Correo</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody id="tbl-admins"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════ EMPLEADOS ═══════ -->
+    <section class="section" id="section-empleados">
+      <div class="page-title"><h2>Empleados</h2><p>Equipo de trabajo de Delizia</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar empleado..." data-target="cards-empleados" />
+        <select class="tb-select" id="filtroDepto" onchange="renderEmpleados()">
+          <option value="">Todos los departamentos</option>
+          <option>Producción</option><option>Ventas</option><option>Logística</option><option>Administración</option><option>Marketing</option>
+        </select>
+        <button class="btn-primary" onclick="openModal('modalEmpleado')">+ Nuevo Empleado</button>
+      </div>
+      <div class="cards-grid" id="cards-empleados"></div>
+    </section>
+
+    <!-- ═══════ CLIENTES ═══════ -->
+    <section class="section" id="section-clientes">
+      <div class="page-title"><h2>Clientes</h2><p>Base de clientes registrados</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar cliente..." data-target="tbl-clientes" />
+        <select class="tb-select" id="filtroTipoCliente" onchange="renderClientes()">
+          <option value="">Todos</option><option>Premium</option><option>Mayorista</option><option>Regular</option>
+        </select>
+        <button class="btn-primary" onclick="openModal('modalCliente')">+ Nuevo Cliente</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Cliente</th><th>Correo</th><th>Teléfono</th><th>Ciudad</th><th>Tipo</th><th>Compras</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody id="tbl-clientes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════ PROVEEDORES ═══════ -->
+    <section class="section" id="section-proveedores">
+      <div class="page-title"><h2>Proveedores</h2><p>Red de abastecimiento de Delizia</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar proveedor..." data-target="cards-proveedores" />
+        <button class="btn-primary" onclick="openModal('modalProveedor')">+ Nuevo Proveedor</button>
+      </div>
+      <div class="cards-grid" id="cards-proveedores"></div>
+    </section>
+
+    <!-- ═══════ PRODUCTOS ═══════ -->
+    <section class="section" id="section-productos">
+      <div class="page-title"><h2>Productos</h2><p>Catálogo completo Delizia — el admin puede editar fotos</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar producto..." data-target="grid-productos" />
+        <select class="tb-select" id="filtroCatProd" onchange="renderProductos('grid-productos')">
+          <option value="">Todas las categorías</option>
+          <option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option>
+        </select>
+        <button class="btn-primary" onclick="openModal('modalProducto')">+ Nuevo Producto</button>
+      </div>
+      <div class="product-grid" id="grid-productos"></div>
+    </section>
+
+    <!-- ═══════ CATEGORIAS ═══════ -->
+    <section class="section" id="section-categorias">
+      <div class="page-title"><h2>Categorías</h2><p>Organización del catálogo</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar categoría..." />
+        <button class="btn-primary" onclick="openModal('modalCategoria')">+ Nueva Categoría</button>
+      </div>
+      <div class="cat-grid" id="grid-categorias"></div>
+    </section>
+
+    <!-- ═══════ PEDIDOS ═══════ -->
+    <section class="section" id="section-pedidos">
+      <div class="page-title"><h2>Pedidos</h2><p>Gestión y seguimiento de órdenes</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar pedido..." data-target="tbl-pedidos" />
+        <select class="tb-select" id="filtroEstadoPedido" onchange="renderPedidos('tbl-pedidos')">
+          <option value="">Todos los estados</option>
+          <option>Pendiente</option><option>En proceso</option><option>Enviado</option><option>Entregado</option>
+        </select>
+        <button class="btn-primary" onclick="openModal('modalPedido')">+ Nuevo Pedido</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Orden</th><th>Cliente</th><th>Fecha</th><th>Productos</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody id="tbl-pedidos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════ EMPLEADO DASHBOARD ═══════ -->
+    <section class="section" id="section-emp-dashboard">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Panel del Empleado</p>
+          <h1>Buen trabajo,<br/><em id="empHeroName">Empleado</em></h1>
+          <p class="hero-desc">Gestiona pedidos, consulta el catálogo y atiende a los clientes de Delizia.</p>
+        </div>
+        <div class="hero-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-blue"><div class="kpi-icon-wrap kpi-ic-blue"><svg width="22" height="22"><use href="#ico-order"/></svg></div><div class="kpi-data"><span class="kpi-value" id="empKpiPedidos">0</span><span class="kpi-label">Pedidos activos</span></div><div class="kpi-trend">Hoy</div></div>
+        <div class="kpi-card kpi-red"><div class="kpi-icon-wrap kpi-ic-red"><svg width="22" height="22"><use href="#ico-product"/></svg></div><div class="kpi-data"><span class="kpi-value" id="empKpiProd">0</span><span class="kpi-label">Productos disponibles</span></div><div class="kpi-trend">Catálogo</div></div>
+        <div class="kpi-card kpi-cyan"><div class="kpi-icon-wrap kpi-ic-cyan"><svg width="22" height="22"><use href="#ico-users"/></svg></div><div class="kpi-data"><span class="kpi-value" id="empKpiCli">0</span><span class="kpi-label">Clientes registrados</span></div><div class="kpi-trend">Total</div></div>
+        <div class="kpi-card kpi-green"><div class="kpi-icon-wrap kpi-ic-green"><svg width="22" height="22"><use href="#ico-chart"/></svg></div><div class="kpi-data"><span class="kpi-value" id="empKpiEntr">0</span><span class="kpi-label">Pedidos entregados</span></div><div class="kpi-trend">Este mes</div></div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="glass-card"><div class="card-header"><h2 class="card-title">Pedidos Recientes</h2></div><div class="activity-list" id="empActivityList"></div></div>
+        <div class="glass-card"><div class="card-header"><h2 class="card-title">Acciones</h2></div>
+          <div class="quick-actions">
+            <button class="qa-btn qa-blue" onclick="navigate('emp-pedidos')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-order"/></svg></div><span>Ver Pedidos</span></button>
+            <button class="qa-btn qa-red"  onclick="navigate('emp-productos')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-product"/></svg></div><span>Catálogo</span></button>
+            <button class="qa-btn qa-cyan" onclick="navigate('emp-clientes')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-users"/></svg></div><span>Clientes</span></button>
+            <button class="qa-btn qa-green" onclick="navigate('emp-perfil')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-profile"/></svg></div><span>Mi Perfil</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPLEADO — PEDIDOS -->
+    <section class="section" id="section-emp-pedidos">
+      <div class="page-title"><h2>Pedidos</h2><p>Gestiona los pedidos de clientes</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar pedido..." data-target="tbl-emp-pedidos" />
+        <select class="tb-select" id="filtroEmpPedido" onchange="renderPedidos('tbl-emp-pedidos')">
+          <option value="">Todos</option><option>Pendiente</option><option>En proceso</option><option>Enviado</option><option>Entregado</option>
+        </select>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Orden</th><th>Cliente</th><th>Fecha</th><th>Productos</th><th>Total</th><th>Estado</th><th>Actualizar</th></tr></thead>
+          <tbody id="tbl-emp-pedidos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- EMPLEADO — PRODUCTOS -->
+    <section class="section" id="section-emp-productos">
+      <div class="page-title"><h2>Catálogo</h2><p>Productos disponibles Delizia</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar producto..." data-target="grid-emp-productos" />
+        <select class="tb-select" id="filtroEmpCat" onchange="renderProductos('grid-emp-productos')">
+          <option value="">Todas las categorías</option>
+          <option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option>
+        </select>
+      </div>
+      <div class="product-grid" id="grid-emp-productos"></div>
+    </section>
+
+    <!-- EMPLEADO — CLIENTES -->
+    <section class="section" id="section-emp-clientes">
+      <div class="page-title"><h2>Clientes</h2><p>Listado de clientes registrados</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar cliente..." data-target="tbl-emp-clientes" />
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Cliente</th><th>Correo</th><th>Teléfono</th><th>Ciudad</th><th>Tipo</th><th>Estado</th></tr></thead>
+          <tbody id="tbl-emp-clientes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- EMPLEADO — PERFIL -->
+    <section class="section" id="section-emp-perfil">
+      <div class="page-title"><h2>Mi Perfil</h2><p>Información de tu cuenta</p></div>
+      <div class="profile-card" id="empPerfilCard"></div>
+      <div class="glass-card" style="max-width:480px;margin-top:20px">
+        <div class="card-header"><h2 class="card-title">Cambiar contraseña</h2></div>
+        <div style="display:flex;flex-direction:column;gap:14px;padding-top:4px">
+          <div class="form-group"><label>Contraseña actual</label><div class="input-wrap-simple"><input type="password" id="passActual" placeholder="••••••••" /></div></div>
+          <div class="form-group"><label>Nueva contraseña</label><div class="input-wrap-simple"><input type="password" id="passNueva" placeholder="••••••••" /></div></div>
+          <div class="form-group"><label>Confirmar contraseña</label><div class="input-wrap-simple"><input type="password" id="passConfirm" placeholder="••••••••" /></div></div>
+          <button class="btn-primary" onclick="cambiarPassword()">Guardar cambios</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CLIENTE INICIO ═══════ -->
+    <section class="section" id="section-cli-inicio">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Mi Portal Delizia</p>
+          <h1>Hola,<br/><em id="cliHeroName">Cliente</em></h1>
+          <p class="hero-desc">Explora nuestros productos lácteos frescos y realiza tus pedidos fácilmente.</p>
+          <a href="#" class="hero-btn" onclick="navigate('cli-catalogo'); return false;">Ver Catálogo</a>
+        </div>
+        <div class="hero-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-blue"><div class="kpi-icon-wrap kpi-ic-blue"><svg width="22" height="22"><use href="#ico-order"/></svg></div><div class="kpi-data"><span class="kpi-value" id="cliKpiPedidos">0</span><span class="kpi-label">Mis pedidos</span></div><div class="kpi-trend">Total</div></div>
+        <div class="kpi-card kpi-red"><div class="kpi-icon-wrap kpi-ic-red"><svg width="22" height="22"><use href="#ico-chart"/></svg></div><div class="kpi-data"><span class="kpi-value" id="cliKpiGasto">0</span><span class="kpi-label">Bs. gastados</span></div><div class="kpi-trend">Acumulado</div></div>
+        <div class="kpi-card kpi-cyan"><div class="kpi-icon-wrap kpi-ic-cyan"><svg width="22" height="22"><use href="#ico-product"/></svg></div><div class="kpi-data"><span class="kpi-value" id="cliKpiEntr">0</span><span class="kpi-label">Pedidos entregados</span></div><div class="kpi-trend">Completados</div></div>
+        <div class="kpi-card kpi-green"><div class="kpi-icon-wrap kpi-ic-green"><svg width="22" height="22"><use href="#ico-admin"/></svg></div><div class="kpi-data"><span class="kpi-value" id="cliKpiTipo">—</span><span class="kpi-label">Categoría cliente</span></div><div class="kpi-trend">Tu nivel</div></div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="glass-card"><div class="card-header"><h2 class="card-title">Mis últimos pedidos</h2></div><div class="activity-list" id="cliPedidosRecientes"></div></div>
+        <div class="glass-card"><div class="card-header"><h2 class="card-title">Acciones</h2></div>
+          <div class="quick-actions">
+            <button class="qa-btn qa-blue" onclick="navigate('cli-catalogo')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-product"/></svg></div><span>Ver Catálogo</span></button>
+            <button class="qa-btn qa-red"  onclick="navigate('cli-mispedidos')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-order"/></svg></div><span>Mis Pedidos</span></button>
+            <button class="qa-btn qa-cyan" onclick="navigate('cli-perfil')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-profile"/></svg></div><span>Mi Perfil</span></button>
+            <button class="qa-btn qa-green" onclick="openModal('modalNuevoPedidoCli')"><div class="qa-icon"><svg width="14" height="14"><use href="#ico-plus"/></svg></div><span>Pedir ahora</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTE — CATÁLOGO -->
+    <section class="section" id="section-cli-catalogo">
+      <div class="page-title"><h2>Catálogo <em>Delizia</em></h2><p>Todos nuestros productos frescos y naturales</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar producto..." data-target="grid-cli-productos" />
+        <select class="tb-select" id="filtroCliCat" onchange="renderProductos('grid-cli-productos')">
+          <option value="">Todas las categorías</option>
+          <option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option>
+        </select>
+      </div>
+      <div class="product-grid" id="grid-cli-productos"></div>
+    </section>
+
+    <!-- CLIENTE — MIS PEDIDOS -->
+    <section class="section" id="section-cli-mispedidos">
+      <div class="page-title"><h2>Mis Pedidos</h2><p>Historial de tus órdenes</p></div>
+      <div class="table-toolbar">
+        <input type="text" class="tb-search" placeholder="Buscar pedido..." data-target="tbl-cli-pedidos" />
+        <button class="btn-primary" onclick="openModal('modalNuevoPedidoCli')">+ Nuevo Pedido</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Orden</th><th>Fecha</th><th>Productos</th><th>Total</th><th>Estado</th></tr></thead>
+          <tbody id="tbl-cli-pedidos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CLIENTE — PERFIL -->
+    <section class="section" id="section-cli-perfil">
+      <div class="page-title"><h2>Mi Perfil</h2><p>Tu información en Delizia</p></div>
+      <div class="profile-card" id="cliPerfilCard"></div>
+    </section>
+  </main>
+
+  <!-- MODAL BACKDROP -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal()"></div>
+
+  <!-- MODAL: NUEVO ADMIN -->
+  <div class="modal" id="modalAdmin">
+    <div class="modal-header"><h3>Nuevo Administrador</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Nombre completo</label><input type="text" id="adminNombre" placeholder="Ej. Sofía Ramírez" /></div>
+      <div class="form-group"><label>Correo / Usuario</label><input type="email" id="adminCorreo" placeholder="sofia@delizia.bo" /></div>
+      <div class="form-group"><label>Contraseña</label><input type="password" id="adminPass" placeholder="••••••••" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarAdmin()">Guardar</button></div>
+  </div>
+
+  <!-- MODAL: NUEVO EMPLEADO -->
+  <div class="modal" id="modalEmpleado">
+    <div class="modal-header"><h3>Nuevo Empleado</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Nombre</label><input type="text" id="empNombre" placeholder="Nombre" /></div>
+        <div class="form-group"><label>Apellido</label><input type="text" id="empApellido" placeholder="Apellido" /></div>
+      </div>
+      <div class="form-group"><label>Correo</label><input type="email" id="empCorreo" placeholder="empleado@delizia.bo" /></div>
+      <div class="form-row">
+        <div class="form-group"><label>Teléfono</label><input type="text" id="empTelefono" placeholder="+591 7X XXX XXX" /></div>
+        <div class="form-group"><label>Desde (año)</label><input type="text" id="empDesde" placeholder="2024" /></div>
+      </div>
+      <div class="form-group"><label>Cargo</label><input type="text" id="empCargo" placeholder="Ej. Ejecutivo de Ventas" /></div>
+      <div class="form-group"><label>Departamento</label>
+        <select id="empDepto"><option>Producción</option><option>Ventas</option><option>Logística</option><option>Administración</option><option>Marketing</option></select>
+      </div>
+      <div class="form-group"><label>Contraseña (acceso al sistema)</label><input type="password" id="empPass" placeholder="••••••••" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarEmpleado()">Guardar</button></div>
+  </div>
+
+  <!-- MODAL: NUEVO CLIENTE -->
+  <div class="modal" id="modalCliente">
+    <div class="modal-header"><h3>Nuevo Cliente</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Nombre</label><input type="text" id="cliNombre" placeholder="Nombre" /></div>
+        <div class="form-group"><label>Apellido</label><input type="text" id="cliApellido" placeholder="Apellido" /></div>
+      </div>
+      <div class="form-group"><label>Correo</label><input type="email" id="cliCorreo" placeholder="cliente@email.com" /></div>
+      <div class="form-row">
+        <div class="form-group"><label>Teléfono</label><input type="text" id="cliTelefono" placeholder="+591 7X XXX XXX" /></div>
+        <div class="form-group"><label>Ciudad</label><input type="text" id="cliCiudad" placeholder="Santa Cruz..." /></div>
+      </div>
+      <div class="form-group"><label>Tipo de cliente</label>
+        <select id="cliTipo"><option>Regular</option><option>Premium</option><option>Mayorista</option></select>
+      </div>
+      <div class="form-group"><label>Contraseña (acceso al sistema)</label><input type="password" id="cliPass" placeholder="••••••••" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarCliente()">Guardar</button></div>
+  </div>
+
+  <!-- MODAL: NUEVO PROVEEDOR -->
+  <div class="modal" id="modalProveedor">
+    <div class="modal-header"><h3>Nuevo Proveedor</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Nombre de empresa</label><input type="text" id="provEmpresa" placeholder="Ej. Agrobol S.A." /></div>
+      <div class="form-group"><label>Rubro</label><input type="text" id="provRubro" placeholder="Ej. Granos y cereales" /></div>
+      <div class="form-row">
+        <div class="form-group"><label>Ciudad</label><input type="text" id="provCiudad" placeholder="Ciudad, Depto." /></div>
+        <div class="form-group"><label>Teléfono</label><input type="text" id="provTelefono" placeholder="+591 X XXX XXXX" /></div>
+      </div>
+      <div class="form-group"><label>Correo</label><input type="email" id="provCorreo" placeholder="ventas@proveedor.bo" /></div>
+      <div class="form-group"><label>Condición de pago</label>
+        <select id="provPago"><option>Contado</option><option>Crédito 15 días</option><option>Crédito 30 días</option><option>Crédito 45 días</option></select>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarProveedor()">Guardar</button></div>
+  </div>
+
+  <!-- MODAL: PRODUCTO (con imagen) -->
+  <div class="modal" id="modalProducto">
+    <div class="modal-header"><h3 id="modalProdTitle">Nuevo Producto</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <!-- Upload imagen -->
+      <div class="img-upload-area" id="imgUploadArea" onclick="document.getElementById('prodImgFile').click()">
+        <div class="img-upload-preview" id="imgPreview">
+          <svg width="36" height="36" style="color:var(--blue-300)"><use href="#ico-image"/></svg>
+          <p>Clic para subir foto del producto</p>
+          <span>JPG, PNG · Máx 2MB</span>
+        </div>
+        <input type="file" id="prodImgFile" accept="image/*" style="display:none" onchange="previewProductImg(event)" />
+      </div>
+      <div class="form-group"><label>Nombre del producto</label><input type="text" id="prodNombre" placeholder="Ej. Leche Entera" /></div>
+      <div class="form-group"><label>Descripción</label><textarea id="prodDesc" placeholder="Descripción del producto..."></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>Precio (Bs.)</label><input type="number" id="prodPrecio" placeholder="0.00" step="0.5" /></div>
+        <div class="form-group"><label>Stock</label><input type="number" id="prodStock" placeholder="0" /></div>
+      </div>
+      <div class="form-group"><label>Categoría</label>
+        <select id="prodCat"><option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option></select>
+      </div>
+      <input type="hidden" id="prodEditId" value="" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="guardarProducto()">Guardar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: CATEGORIA -->
+  <div class="modal" id="modalCategoria">
+    <div class="modal-header"><h3>Nueva Categoría</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Nombre</label><input type="text" id="catNombre" placeholder="Ej. Yogures" /></div>
+      <div class="form-group"><label>Descripción</label><textarea id="catDesc" placeholder="Descripción breve..."></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarCategoria()">Guardar</button></div>
+  </div>
+
+  <!-- MODAL: PEDIDO (admin) -->
+  <div class="modal" id="modalPedido">
+    <div class="modal-header"><h3>Nuevo Pedido</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Cliente</label><select id="pedidoCliente"></select></div>
+      <div class="form-group"><label>Productos</label><input type="text" id="pedidoProductos" placeholder="Ej. Leche × 5, Queso × 2" /></div>
+      <div class="form-row">
+        <div class="form-group"><label>Total (Bs.)</label><input type="number" id="pedidoTotal" placeholder="0.00" step="0.5" /></div>
+        <div class="form-group"><label>Estado</label><select id="pedidoEstado"><option>Pendiente</option><option>En proceso</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarPedido()">Guardar</button></div>
+  </div>
+
+  <!-- MODAL: PEDIDO (cliente) -->
+  <div class="modal" id="modalNuevoPedidoCli">
+    <div class="modal-header"><h3>Realizar Pedido</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Producto</label><select id="cliPedidoProd"></select></div>
+      <div class="form-group"><label>Cantidad</label><input type="number" id="cliPedidoCant" value="1" min="1" /></div>
+      <div class="form-group"><label>Notas adicionales</label><textarea id="cliPedidoNota" placeholder="Ej. Entregar por la mañana..."></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarPedidoCliente()">Confirmar pedido</button></div>
+  </div>
+
+  <!-- MODAL: EDITAR IMAGEN PRODUCTO -->
+  <div class="modal" id="modalEditImg">
+    <div class="modal-header"><h3>Editar foto del producto</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="img-upload-area" id="editImgArea" onclick="document.getElementById('editImgFile').click()">
+        <div class="img-upload-preview" id="editImgPreview">
+          <svg width="36" height="36" style="color:var(--blue-300)"><use href="#ico-upload"/></svg>
+          <p>Clic para cambiar la imagen</p>
+        </div>
+        <input type="file" id="editImgFile" accept="image/*" style="display:none" onchange="previewEditImg(event)" />
+      </div>
+      <input type="hidden" id="editImgProdId" value="" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-danger"   onclick="quitarImagenEdicion()">Quitar foto</button>
+      <button class="btn-primary" id="saveEditImgBtn" onclick="guardarImagenEdicion()">Guardar foto</button>
+    </div>
+  </div>
+
+  <!-- MODAL: CONFIRMAR ELIMINACIÓN -->
+  <div class="modal" id="modalConfirm">
+    <div class="modal-header"><h3>Confirmar eliminación</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body"><p style="color:var(--text-secondary);font-size:14px;line-height:1.7" id="confirmMsg">Esta acción no se puede deshacer.</p></div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-danger" id="confirmBtn">Eliminar</button></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
