@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-db.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -661,6 +665,18 @@
     }
     initDzDB();
 
+    // ── FIREBASE SYNC ─────────────────────────────────────
+    function _syncFromFs(key) {
+      if (window.dzSyncKey) return window.dzSyncKey(key);
+      return Promise.resolve();
+    }
+    function _pushToFs(key) {
+      if (window.DB) {
+        const v = JSON.parse(localStorage.getItem('dz_' + key) || '[]');
+        window.DB.set(key, v);
+      }
+    }
+
     // ── TABS ─────────────────────────────────────────────
     let selectedRole = 'admin';
     document.querySelectorAll('.role-tab').forEach(tab => {
@@ -709,7 +725,8 @@
       const pass   = document.getElementById('loginPass').value;
       btn.classList.add('loading');
       errMsg.classList.remove('show');
-      setTimeout(() => {
+      // Sincronizar usuarios desde Firestore antes de validar
+      _syncFromFs('users').then(() => {
         const users = JSON.parse(localStorage.getItem('dz_users') || '[]');
         const found = users.find(u =>
           u.usuario === user && u.password === pass && u.rol === selectedRole && u.activo
@@ -724,7 +741,7 @@
           errMsg.classList.add('show');
           document.getElementById('loginPass').value = '';
         }
-      }, 900);
+      });
     }
 
     // ── REGISTRO CLIENTE ──────────────────────────────────
@@ -745,6 +762,9 @@
       const cliId = clis.length ? Math.max(...clis.map(c=>c.id))+1 : 1;
       clis.push({ id:cliId, nombre, correo, telefono:tel, ciudad, tipo:'Regular', totalCompras:0, activo:true });
       localStorage.setItem('dz_clientes', JSON.stringify(clis));
+      // Sincronizar con Firestore
+      _pushToFs('users');
+      _pushToFs('clientes');
       // Iniciar sesión automáticamente
       sessionStorage.setItem('dz_session', JSON.stringify({ id:newId, nombre, rol:'cliente', usuario:correo }));
       window.location.href = 'index.html';
