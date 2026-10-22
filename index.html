@@ -7,7 +7,7 @@
   <meta name="description" content="Sistema de gestión empresarial Delizia Bolivia" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
   <!-- SVG Icon Sprite -->
@@ -33,6 +33,7 @@
     <symbol id="ico-cow"      viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="8" ry="6" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="9"  cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="10" r="1.5" fill="currentColor"/><path d="M7 8C7 6 6 4 4 4M17 8C17 6 18 4 20 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M9 17c1 1 5 1 6 0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
     <symbol id="ico-plus"     viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2"/></symbol>
     <symbol id="ico-profile"  viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="ico-tree"     viewBox="0 0 24 24"><rect x="2" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 12h3M11 5v14M11 5h4M11 12h4M11 19h4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="5" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="12" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="19" r="2.5" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
     <symbol id="ico-lock"     viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
   </svg>
 </head>
@@ -41,8 +42,8 @@
   <!-- ░░ SIDEBAR ░░ -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <img src="logo.jpg" alt="Delizia" class="logo-img" />
-      <span class="logo-tagline">Sistema de Gestión</span>
+      <div class="brand-word">Delizia</div>
+      <span class="logo-tagline">Planificación y Gestión</span>
     </div>
 
     <div class="sidebar-user" id="sidebarUser">
@@ -68,6 +69,11 @@
       </a>
       <a href="#" class="nav-item" data-section="reportes">
         <svg class="nav-icon"><use href="#ico-chart"/></svg><span>Informes</span>
+      </a>
+
+      <span class="nav-label">Producción</span>
+      <a href="#" class="nav-item" data-section="planificacion">
+        <svg class="nav-icon"><use href="#ico-tree"/></svg><span>Planificación (VME)</span>
       </a>
 
       <span class="nav-label">Gestión</span>
@@ -101,6 +107,9 @@
       <span class="nav-label">Mi Panel</span>
       <a href="#" class="nav-item active" data-section="emp-dashboard">
         <svg class="nav-icon"><use href="#ico-home"/></svg><span>Inicio</span>
+      </a>
+      <a href="#" class="nav-item" data-section="planificacion">
+        <svg class="nav-icon"><use href="#ico-tree"/></svg><span>Planificación (VME)</span>
       </a>
       <a href="#" class="nav-item" data-section="emp-pedidos">
         <svg class="nav-icon"><use href="#ico-order"/></svg><span>Pedidos</span>
@@ -169,8 +178,8 @@
         <div class="hero-text">
           <p class="hero-eyebrow">Panel de Control</p>
           <h1>Delizia<br /><em>Bolivia</em></h1>
-          <p class="hero-desc">La empresa láctea boliviana más querida. Calidad y sabor en cada producto.</p>
-          <a href="#" class="hero-btn" onclick="navigate('productos'); return false;">Ver Catálogo</a>
+          <p class="hero-desc">Helados, lácteos y bebidas hechos en Bolivia desde 1988. Planifique la producción del mes con el Valor Monetario Esperado.</p>
+          <a href="#" class="hero-btn" onclick="navigate('planificacion'); return false;">Planificar producción</a>
         </div>
         <div class="hero-orbs">
           <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
@@ -232,26 +241,113 @@
 
     <!-- ═══════ SOBRE DELIZIA ═══════ -->
     <section class="section" id="section-nosotros">
-      <div class="page-title"><h2>Sobre <em>Delizia</em></h2><p>La empresa láctea boliviana de mayor tradición</p></div>
+      <div class="page-title"><h2>Sobre <em>Delizia</em></h2><p>Empresa boliviana de helados, lácteos y bebidas</p></div>
       <div class="about-hero">
-        <div class="about-logo-wrap"><img src="logo.jpg" alt="Delizia" class="about-logo" /></div>
+        <div class="about-logo-wrap"><div class="brand-word brand-word-lg">Delizia</div></div>
         <div class="about-text">
-          <h3>Sabor boliviano desde 2010</h3>
-          <p><strong>Delizia</strong> es una empresa boliviana dedicada a la producción y distribución de productos lácteos de la más alta calidad. Fundada en <strong>Santa Cruz de la Sierra</strong>, trabajamos con productores locales para llevar lo mejor del campo boliviano a tu mesa.</p>
-          <p>Desde leche entera hasta yogures, quesos y derivados, Delizia es sinónimo de <strong>sabor auténtico</strong> y calidad garantizada por SENASAG.</p>
+          <h3>Sabor boliviano desde 1988</h3>
+          <p><strong>Delizia</strong> nació en 1988 en un garaje de Miraflores (La Paz), con cinco personas, dos máquinas y el primer helado artesanal de litro. Hoy elabora <strong>helados, lácteos y bebidas</strong> en su planta industrial de <strong>El Alto</strong>, inaugurada en 2001.</p>
+          <p>Su producto llega al consumidor a través de una red de más de <strong>162 agencias</strong> y de microemprendedores en todo el país.</p>
           <div class="about-tags">
-            <span class="tag tag-blue">100% Natural</span>
+            <span class="tag tag-blue">Helados</span>
+            <span class="tag tag-blue">Lácteos</span>
+            <span class="tag tag-blue">Bebidas</span>
             <span class="tag tag-blue">Hecho en Bolivia</span>
-            <span class="tag tag-blue">Sin conservantes</span>
-            <span class="tag tag-blue">Cert. SENASAG</span>
           </div>
         </div>
       </div>
       <div class="pillars-grid">
-        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-admin"/></svg></div><h4>Misión</h4><p>Brindar productos lácteos de calidad superior, frescos y nutritivos, que fortalezcan la alimentación de las familias bolivianas.</p></div>
-        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-chart"/></svg></div><h4>Visión</h4><p>Ser la marca láctea líder en Bolivia y expandir nuestra presencia en toda Latinoamérica para el año 2030.</p></div>
-        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-lock"/></svg></div><h4>Valores</h4><p>Calidad · Frescura · Honestidad · Compromiso con Bolivia · Innovación · Sostenibilidad.</p></div>
-        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-users"/></svg></div><h4>Impacto</h4><p>+500 familias productoras, 9 departamentos cubiertos y 15 años de trayectoria en el mercado boliviano.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-admin"/></svg></div><h4>1988 · Inicio</h4><p>Nace en Miraflores (La Paz) con el primer helado artesanal de litro. En 1994 inicia la línea de yogurt.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-product"/></svg></div><h4>2001 · Planta El Alto</h4><p>Se inaugura la planta industrial en El Alto, dedicada a helados, bebidas y lácteos.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-users"/></svg></div><h4>Agencias</h4><p>Desde 2010 el modelo de agencias Delizia crece hasta superar las 162 agencias operativas.</p></div>
+        <div class="pillar-card"><div class="pillar-icon-svg"><svg width="32" height="32"><use href="#ico-chart"/></svg></div><h4>2024 · Liderazgo</h4><p>Cierra el año con el 74,4 % del mercado del helado en Bolivia.</p></div>
+      </div>
+      <p class="plan-note" style="margin-top:14px">Fuente: delizia.bo, sección Nuestra Historia.</p>
+    </section>
+
+    <!-- ═══════ PLANIFICACIÓN DE LA PRODUCCIÓN (VME) ═══════ -->
+    <section class="section" id="section-planificacion">
+      <div class="page-title"><h2>Planificación de la <em>producción</em></h2><p>Árbol de decisión con el criterio del Valor Monetario Esperado (VME)</p></div>
+
+      <div class="plan-steps">
+        <span class="plan-step">1 · Datos del mes</span>
+        <span class="plan-step">2 · Validación</span>
+        <span class="plan-step">3 · Lotes y cámara fría</span>
+        <span class="plan-step">4 · VME</span>
+        <span class="plan-step">5 · Orden de producción</span>
+      </div>
+
+      <div class="plan-stack">
+        <div class="glass-card">
+          <div class="card-header"><h2 class="card-title">Datos del mes a planificar</h2><span class="card-badge">Entrada</span></div>
+          <div class="plan-grid">
+            <div class="form-group span-2"><label>Producto</label><select id="plProducto" onchange="planProductoCambiado()"></select></div>
+            <div class="form-group"><label>Mes a planificar</label><input type="month" id="plMes" /></div>
+            <div class="form-group"><label>Clima esperado</label>
+              <select id="plClima" onchange="planClimaCambiado()"><option>Cálido</option><option selected>Templado</option><option>Frío</option></select>
+            </div>
+
+            <span class="plan-sub">Ventas del mismo mes en años anteriores (unidades)</span>
+            <div class="form-group"><label>Hace 3 años</label><input type="number" id="plHist1" min="0" /></div>
+            <div class="form-group"><label>Hace 2 años</label><input type="number" id="plHist2" min="0" /></div>
+            <div class="form-group"><label>Año pasado</label><input type="number" id="plHist3" min="0" /></div>
+            <div class="form-group"><label>Ajuste por clima (%)</label><input type="number" id="plAjuste" /></div>
+
+            <span class="plan-sub">Costos, precio y producto</span>
+            <div class="form-group"><label>Precio de venta (Bs/u)</label><input type="number" id="plPrecio" min="0" step="0.01" /></div>
+            <div class="form-group"><label>Costo de producción (Bs/u)</label><input type="number" id="plCosto" min="0" step="0.01" /></div>
+            <div class="form-group"><label>Vida útil (días)</label><input type="number" id="plVida" min="0" /></div>
+            <div class="form-group"><label>Recuperación sobrante (Bs/u)</label><input type="number" id="plRescate" min="0" step="0.01" /></div>
+
+            <span class="plan-sub">Escenarios de demanda y capacidad</span>
+            <div class="form-group"><label>Prob. demanda alta (%)</label><input type="number" id="plPAlta" min="0" /></div>
+            <div class="form-group"><label>Prob. demanda media (%)</label><input type="number" id="plPMedia" min="0" /></div>
+            <div class="form-group"><label>Prob. demanda baja (%)</label><input type="number" id="plPBaja" min="0" /></div>
+            <div class="form-group"><label>Variación entre escenarios (%)</label><input type="number" id="plVariacion" min="0" /></div>
+            <div class="form-group span-2"><label>Capacidad disponible de cámara fría (unidades)</label><input type="number" id="plCapacidad" min="0" /></div>
+            <div class="form-group span-2"><label>Unidades por lote</label><input type="number" id="plLote" min="1" /></div>
+          </div>
+          <div id="planAvisos"></div>
+          <div class="plan-actions">
+            <button class="btn-primary" onclick="calcularPlan()">Calcular VME</button>
+            <button class="btn-secondary" onclick="cargarEjemploPlan()">Cargar datos de ejemplo</button>
+            <button class="btn-secondary" onclick="limpiarPlan()">Limpiar</button>
+          </div>
+        </div>
+
+        <div id="planResultado" style="display:none">
+          <div class="plan-two">
+            <div class="glass-card">
+              <div class="card-header"><h2 class="card-title">Demanda estimada</h2><span class="card-badge">Escenarios</span></div>
+              <div id="planDemanda"></div>
+            </div>
+            <div class="glass-card">
+              <div class="card-header"><h2 class="card-title">Lotes alternativos</h2><span class="card-badge">Cámara fría</span></div>
+              <div id="planLotes"></div>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="card-header"><h2 class="card-title">Matriz de ganancias y VME</h2><span class="card-badge">Bs</span></div>
+            <div class="table-wrapper" id="planMatriz"></div>
+          </div>
+          <div class="plan-two plan-two-wide">
+            <div class="glass-card">
+              <div class="card-header"><h2 class="card-title">Árbol de decisión</h2><span class="card-badge">VME</span></div>
+              <div class="tree-wrap" id="planArbol"></div>
+            </div>
+            <div class="decision-box" id="planDecision"></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header"><h2 class="card-title">Órdenes de producción y cierre del mes</h2><span class="card-badge">Historial</span></div>
+          <div class="table-wrapper">
+            <table class="data-table plan-hist">
+              <thead><tr><th>Orden</th><th>Mes</th><th>Producto</th><th>Lote</th><th>VME</th><th>Estado</th><th>Ventas reales</th><th>Merma</th><th>Ganancia</th></tr></thead>
+              <tbody id="tbl-planes"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -273,6 +369,7 @@
           <option value="pedido">Pedidos</option>
           <option value="empleado">Empleados</option>
           <option value="proveedor">Proveedores</option>
+          <option value="planificacion">Planificación</option>
         </select>
         <button class="btn-danger" onclick="limpiarBitacora()">Limpiar bitácora</button>
       </div>
@@ -344,7 +441,7 @@
         <input type="text" class="tb-search" placeholder="Buscar producto..." data-target="grid-productos" />
         <select class="tb-select" id="filtroCatProd" onchange="renderProductos('grid-productos')">
           <option value="">Todas las categorías</option>
-          <option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option>
+          <option>Helados</option><option>Lácteos</option><option>Bebidas</option>
         </select>
         <button class="btn-primary" onclick="openModal('modalProducto')">+ Nuevo Producto</button>
       </div>
@@ -433,7 +530,7 @@
         <input type="text" class="tb-search" placeholder="Buscar producto..." data-target="grid-emp-productos" />
         <select class="tb-select" id="filtroEmpCat" onchange="renderProductos('grid-emp-productos')">
           <option value="">Todas las categorías</option>
-          <option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option>
+          <option>Helados</option><option>Lácteos</option><option>Bebidas</option>
         </select>
       </div>
       <div class="product-grid" id="grid-emp-productos"></div>
@@ -505,7 +602,7 @@
         <input type="text" class="tb-search" placeholder="Buscar producto..." data-target="grid-cli-productos" />
         <select class="tb-select" id="filtroCliCat" onchange="renderProductos('grid-cli-productos')">
           <option value="">Todas las categorías</option>
-          <option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option>
+          <option>Helados</option><option>Lácteos</option><option>Bebidas</option>
         </select>
       </div>
       <div class="product-grid" id="grid-cli-productos"></div>
@@ -628,7 +725,7 @@
         <div class="form-group"><label>Stock</label><input type="number" id="prodStock" placeholder="0" /></div>
       </div>
       <div class="form-group"><label>Categoría</label>
-        <select id="prodCat"><option>Lácteos</option><option>Quesos</option><option>Derivados</option><option>Yogures</option></select>
+        <select id="prodCat"><option>Helados</option><option>Lácteos</option><option>Bebidas</option></select>
       </div>
       <input type="hidden" id="prodEditId" value="" />
     </div>
@@ -700,6 +797,18 @@
     <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-danger" id="confirmBtn">Eliminar</button></div>
   </div>
 
+  <!-- MODAL: VENTAS REALES DEL MES -->
+  <div class="modal" id="modalVentasReales">
+    <div class="modal-header"><h3>Registrar ventas reales</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <p style="color:var(--text-secondary);font-size:13px" id="vrInfo"></p>
+      <input type="hidden" id="vrPlanId" />
+      <div class="form-group"><label>Unidades vendidas en el mes</label><input type="number" id="vrVentas" min="0" placeholder="Ej. 8500" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn-primary" onclick="guardarVentasReales()">Cerrar el mes</button></div>
+  </div>
+
   <script src="app.js"></script>
+  <script src="planificacion.js"></script>
 </body>
 </html>

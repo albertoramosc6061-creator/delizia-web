@@ -7,32 +7,33 @@
   <meta name="description" content="Sistema de gestión Delizia Bolivia - Ingresa con tu cuenta" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue-50:  #EBF5FF;
-      --blue-100: #DBEEFF;
-      --blue-200: #BAD8F7;
-      --blue-300: #7CB9E8;
-      --blue-400: #4A9FD4;
-      --blue-500: #1B74B8;
-      --blue-600: #1056A0;
-      --blue-700: #0A3D80;
-      --red-50:   #FFF0F0;
-      --red-100:  #FFD6D6;
-      --red-200:  #FFB3B3;
-      --red-300:  #FF8080;
-      --red-400:  #F05050;
-      --red-500:  #CC2929;
+      /* Colores de marca tomados de delizia.bo */
+      --blue-50:  #EEF8FD;
+      --blue-100: #D6EFFA;
+      --blue-200: #A9DDF3;
+      --blue-300: #5BC3EA;
+      --blue-400: #12A7DF;
+      --blue-500: #1C6DAD;
+      --blue-600: #0A4DB0;
+      --blue-700: #003A96;
+      --red-50:   #FEF0EF;
+      --red-100:  #FCDAD7;
+      --red-200:  #F8B4AE;
+      --red-300:  #F07A70;
+      --red-400:  #E5483C;
+      --red-500:  #D52B1E;
       --white:    #FFFFFF;
-      --bg:       #F0F6FF;
+      --bg:       #EEF8FD;
     }
 
     html, body {
       height: 100%;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: var(--bg);
       overflow: hidden;
     }
@@ -87,11 +88,20 @@
     }
 
     .left-logo {
-      width: 180px;
-      height: 180px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 24px rgba(0,0,80,0.3));
-      margin-bottom: 24px;
+      display: inline-block;
+      font-family: 'Nunito', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: 64px;
+      letter-spacing: -1px;
+      line-height: 1;
+      color: #fff;
+      padding: 14px 40px 18px;
+      border-radius: 999px;
+      background: var(--blue-700);
+      border: 4px solid var(--blue-400);
+      box-shadow: 0 10px 30px rgba(0,20,80,0.35);
+      margin-bottom: 28px;
       animation: floatLogo 4s ease-in-out infinite;
     }
 
@@ -242,7 +252,7 @@
       padding: 8px 6px;
       border: none;
       border-radius: 9px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
@@ -284,7 +294,7 @@
       padding: 13px 44px 13px 16px;
       border: 1.5px solid var(--blue-200);
       border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       color: #1a2a4a;
       background: var(--blue-50);
@@ -353,7 +363,7 @@
       color: white;
       border: none;
       border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
@@ -463,21 +473,21 @@
       <div class="orb orb-c"></div>
 
       <div class="left-content">
-        <img src="logo.jpg" alt="Delizia" class="left-logo" />
+        <div class="left-logo">Delizia</div>
         <h1>¡Bienvenido!</h1>
-        <p>Al sistema de gestión empresarial de Delizia, la empresa láctea boliviana que llena tu vida de sabor.</p>
+        <p>Al sistema de planificación y gestión de Delizia, la empresa boliviana de helados, lácteos y bebidas.</p>
         <div class="left-stats">
           <div class="stat-item">
-            <div class="stat-num">15+</div>
-            <div class="stat-lbl">Años en el<br>mercado</div>
+            <div class="stat-num">1988</div>
+            <div class="stat-lbl">Año de<br>fundación</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">200+</div>
-            <div class="stat-lbl">Familias<br>beneficiadas</div>
+            <div class="stat-num">162+</div>
+            <div class="stat-lbl">Agencias en<br>el país</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">8</div>
-            <div class="stat-lbl">Países con<br>presencia</div>
+            <div class="stat-num">74,4%</div>
+            <div class="stat-lbl">Mercado del<br>helado (2024)</div>
           </div>
         </div>
       </div>
@@ -513,7 +523,7 @@
           <div class="input-group">
             <label>Usuario</label>
             <div class="input-wrap">
-              <input type="text" id="loginUser" placeholder="Ej: admin@delizia.bo" autocomplete="username" required />
+              <input type="text" id="loginUser" placeholder="Ej: usuario@delizia.bo" autocomplete="username" required />
               <span class="input-icon">✉</span>
             </div>
           </div>
@@ -531,7 +541,7 @@
               <input type="checkbox" id="rememberMe" />
               Recordarme
             </label>
-            <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+            <a href="#" class="forgot" onclick="olvidePassword(); return false;">¿Olvidaste tu contraseña?</a>
           </div>
 
           <button type="submit" class="btn-login" id="loginBtn">
@@ -585,59 +595,6 @@
   </div>
 
   <script>
-    // ── INIT DATABASE ──────────────────────────────────
-    function initDB() {
-      if (!localStorage.getItem('delizia_users')) {
-        const users = [
-          { id: 1, usuario: 'admin@delizia.bo',    password: 'admin123', rol: 'admin',    nombre: 'Sofía Ramírez',   activo: true },
-          { id: 2, usuario: 'empleado@delizia.bo', password: 'emp123',   rol: 'empleado', nombre: 'Jorge Mamani',    activo: true },
-          { id: 3, usuario: 'cliente@delizia.bo',  password: 'cli123',   rol: 'cliente',  nombre: 'Carla Méndez',   activo: true },
-          { id: 4, usuario: 'sup@delizia.bo',      password: 'sup123',   rol: 'admin',    nombre: 'Marco Ticona',   activo: true },
-        ];
-        localStorage.setItem('delizia_users', JSON.stringify(users));
-      }
-
-      // Seed más datos iniciales
-      if (!localStorage.getItem('delizia_clientes')) {
-        localStorage.setItem('delizia_clientes', JSON.stringify([
-          { id: 1, nombre: 'Carla Méndez',    correo: 'carla.mendez@gmail.com', telefono: '+591 70 111 222', ciudad: 'Santa Cruz', tipo: 'Premium',   totalCompras: 4820, activo: true },
-          { id: 2, nombre: 'Diego Pinto',     correo: 'diego.pinto@outlook.com',telefono: '+591 72 333 444', ciudad: 'La Paz',     tipo: 'Mayorista', totalCompras: 18300, activo: true },
-          { id: 3, nombre: 'Ana Herrera',     correo: 'ana.herrera@gmail.com',  telefono: '+591 68 555 666', ciudad: 'Cochabamba', tipo: 'Regular',   totalCompras: 1250, activo: true },
-        ]));
-      }
-      if (!localStorage.getItem('delizia_empleados')) {
-        localStorage.setItem('delizia_empleados', JSON.stringify([
-          { id: 1, nombre: 'Rosa Choque',   correo: 'rosa.choque@delizia.bo',   telefono: '+591 77 123 456', cargo: 'Jefa de Producción',     departamento: 'Producción',    activo: true,  desde: '2018' },
-          { id: 2, nombre: 'Jorge Mamani',  correo: 'jorge.mamani@delizia.bo',  telefono: '+591 70 234 567', cargo: 'Ejecutivo de Ventas',     departamento: 'Ventas',        activo: true,  desde: '2020' },
-          { id: 3, nombre: 'Valeria Quiroga',correo: 'valeria.quiroga@delizia.bo',telefono: '+591 72 345 678', cargo: 'Coordinadora Logística', departamento: 'Logística',     activo: true,  desde: '2019' },
-        ]));
-      }
-      if (!localStorage.getItem('delizia_productos')) {
-        localStorage.setItem('delizia_productos', JSON.stringify([
-          { id: 1, nombre: 'Leche Entera Delizia',  precio: 8.50,  stock: 450, categoria: 'Lácteos',    descripcion: 'Leche entera pasteurizada de alta calidad. 1 litro.',         emoji: '🥛' },
-          { id: 2, nombre: 'Yogurt Natural',         precio: 12.00, stock: 230, categoria: 'Lácteos',    descripcion: 'Yogurt natural sin azúcar, rico en probióticos. 500ml.',       emoji: '🍦' },
-          { id: 3, nombre: 'Queso Fresco',           precio: 25.00, stock: 80,  categoria: 'Quesos',     descripcion: 'Queso fresco artesanal de leche entera. 400g.',                emoji: '🧀' },
-          { id: 4, nombre: 'Mantequilla',            precio: 18.00, stock: 120, categoria: 'Derivados',  descripcion: 'Mantequilla cremosa sin sal. 250g.',                           emoji: '🧈' },
-          { id: 5, nombre: 'Crema de Leche',         precio: 15.00, stock: 95,  categoria: 'Derivados',  descripcion: 'Crema de leche para cocina y repostería. 200ml.',              emoji: '🫙' },
-          { id: 6, nombre: 'Leche Chocolatada',      precio: 9.50,  stock: 310, categoria: 'Lácteos',    descripcion: 'Bebida láctea con chocolate natural. 200ml.',                  emoji: '🍫' },
-        ]));
-      }
-      if (!localStorage.getItem('delizia_pedidos')) {
-        localStorage.setItem('delizia_pedidos', JSON.stringify([
-          { id: 1, orden: 'ORD-0342', clienteId: 1, cliente: 'Carla Méndez',   fecha: '21/10/2025', productos: 'Leche × 5, Yogurt × 3', total: 78.50,  estado: 'Pendiente' },
-          { id: 2, orden: 'ORD-0341', clienteId: 2, cliente: 'Diego Pinto',    fecha: '20/10/2025', productos: 'Queso × 10, Mantequilla × 5', total: 340.00, estado: 'En proceso' },
-          { id: 3, orden: 'ORD-0340', clienteId: 3, cliente: 'Ana Herrera',    fecha: '19/10/2025', productos: 'Crema × 4, Leche Choc × 6', total: 117.00, estado: 'Enviado' },
-        ]));
-      }
-      if (!localStorage.getItem('delizia_proveedores')) {
-        localStorage.setItem('delizia_proveedores', JSON.stringify([
-          { id: 1, empresa: 'Agrobol S.A.',      rubro: 'Granos y cereales',    ciudad: 'El Alto, La Paz',    telefono: '+591 2 234 5678', correo: 'ventas@agrobol.bo',       pago: 'Crédito 30 días', activo: true },
-          { id: 2, empresa: 'Cacao Alto Beni',   rubro: 'Cacao premium',        ciudad: 'Alto Beni, Beni',    telefono: '+591 3 456 7890', correo: 'info@cacaoaltobeni.bo',   pago: 'Contado',         activo: true },
-          { id: 3, empresa: 'Hierbas Andinas',   rubro: 'Hierbas aromáticas',   ciudad: 'Sucre, Chuquisaca',  telefono: '+591 4 567 8901', correo: 'hierbas@andinas.bo',      pago: 'Crédito 15 días', activo: true },
-        ]));
-      }
-    }
-
     // ── INIT ─────────────────────────────────────────────
     function initDzDB() {
       // Siempre garantizar que los usuarios demo existen (incluso si ya se sembró)
@@ -672,6 +629,7 @@
     });
 
     function showRegisterForm() {
+      document.getElementById('errorMsg').classList.remove('show');
       document.getElementById('loginForm').style.display = 'none';
       document.getElementById('registerForm').style.display = 'block';
       document.querySelector('.demo-accounts').style.display = 'none';
@@ -701,49 +659,91 @@
     }
 
     // ── LOGIN ─────────────────────────────────────────────
+    const MAX_INTENTOS = 3;          // intentos fallidos seguidos permitidos
+    const BLOQUEO_MS   = 60 * 1000;  // tiempo de bloqueo de la cuenta
+
+    function mostrarError(msg) {
+      const errMsg = document.getElementById('errorMsg');
+      errMsg.textContent = msg;
+      errMsg.classList.remove('show');
+      void errMsg.offsetWidth; // reinicia la animación
+      errMsg.classList.add('show');
+    }
+
     function handleLogin(e) {
       e.preventDefault();
       const btn    = document.getElementById('loginBtn');
       const errMsg = document.getElementById('errorMsg');
-      const user   = document.getElementById('loginUser').value.trim();
+      const user   = document.getElementById('loginUser').value.trim().toLowerCase();
       const pass   = document.getElementById('loginPass').value;
-      btn.classList.add('loading');
       errMsg.classList.remove('show');
+
+      const intentos = JSON.parse(localStorage.getItem('dz_login_intentos') || '{}');
+      const reg = intentos[user] || { fallos: 0, hasta: 0 };
+      if (reg.hasta > Date.now()) {
+        mostrarError(`Cuenta bloqueada por ${MAX_INTENTOS} intentos fallidos. Intente de nuevo en ${Math.ceil((reg.hasta - Date.now()) / 1000)} segundos.`);
+        return;
+      }
+
+      btn.classList.add('loading');
       setTimeout(() => {
         const users = JSON.parse(localStorage.getItem('dz_users') || '[]');
         const found = users.find(u =>
-          u.usuario === user && u.password === pass && u.rol === selectedRole && u.activo
+          u.usuario.toLowerCase() === user && u.password === pass && u.rol === selectedRole && u.activo
         );
         btn.classList.remove('loading');
         if (found) {
+          delete intentos[user];
+          localStorage.setItem('dz_login_intentos', JSON.stringify(intentos));
+          if (document.getElementById('rememberMe').checked) localStorage.setItem('dz_recordar', found.usuario);
+          else localStorage.removeItem('dz_recordar');
           sessionStorage.setItem('dz_session', JSON.stringify({
             id: found.id, nombre: found.nombre, rol: found.rol, usuario: found.usuario
           }));
           window.location.href = 'index.html';
         } else {
-          errMsg.classList.add('show');
+          reg.fallos++;
+          if (reg.fallos >= MAX_INTENTOS) { reg.hasta = Date.now() + BLOQUEO_MS; reg.fallos = 0; }
+          intentos[user] = reg;
+          localStorage.setItem('dz_login_intentos', JSON.stringify(intentos));
+          mostrarError(reg.hasta > Date.now()
+            ? `Cuenta bloqueada por ${MAX_INTENTOS} intentos fallidos. Intente de nuevo en ${BLOQUEO_MS / 1000} segundos.`
+            : `Usuario o contraseña incorrectos. Verifica el rol seleccionado. (Intento ${reg.fallos} de ${MAX_INTENTOS})`);
           document.getElementById('loginPass').value = '';
         }
       }, 900);
     }
 
+    function olvidePassword() {
+      mostrarError('Por seguridad, la contraseña solo la restablece el administrador del sistema. Comuníquese con él para obtener una nueva.');
+    }
+
+    // ── RECORDARME ────────────────────────────────────────
+    const recordado = localStorage.getItem('dz_recordar');
+    if (recordado) {
+      document.getElementById('loginUser').value = recordado;
+      document.getElementById('rememberMe').checked = true;
+    }
+
     // ── REGISTRO CLIENTE ──────────────────────────────────
     function registrarCliente() {
       const nombre = (document.getElementById('regNombre').value + ' ' + document.getElementById('regApellido').value).trim();
-      const correo = document.getElementById('regCorreo').value.trim();
+      const correo = document.getElementById('regCorreo').value.trim().toLowerCase();
       const tel    = document.getElementById('regTelefono').value.trim();
       const ciudad = document.getElementById('regCiudad').value.trim();
       const pass   = document.getElementById('regPass').value;
       if (!nombre || !correo || !pass) { alert('Completa nombre, correo y contraseña'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) { alert('Ingresa un correo válido'); return; }
+      if (pass.length < 6) { alert('La contraseña debe tener al menos 6 caracteres'); return; }
       const users = JSON.parse(localStorage.getItem('dz_users') || '[]');
-      if (users.find(u => u.usuario === correo)) { alert('Este correo ya está registrado'); return; }
+      if (users.find(u => u.usuario.toLowerCase() === correo)) { alert('Este correo ya está registrado'); return; }
       const newId = users.length ? Math.max(...users.map(u=>u.id))+1 : 1;
       users.push({ id:newId, nombre, usuario:correo, password:pass, rol:'cliente', activo:true, foto:null });
       localStorage.setItem('dz_users', JSON.stringify(users));
-      // Guardar cliente
+      // Guardar cliente (enlazado a su usuario por userId)
       const clis = JSON.parse(localStorage.getItem('dz_clientes') || '[]');
       const cliId = clis.length ? Math.max(...clis.map(c=>c.id))+1 : 1;
-      clis.push({ id:cliId, nombre, correo, telefono:tel, ciudad, tipo:'Regular', totalCompras:0, activo:true });
+      clis.push({ id:cliId, userId:newId, nombre, correo, telefono:tel, ciudad, tipo:'Regular', totalCompras:0, activo:true });
       localStorage.setItem('dz_clientes', JSON.stringify(clis));
       // Iniciar sesión automáticamente
       sessionStorage.setItem('dz_session', JSON.stringify({ id:newId, nombre, rol:'cliente', usuario:correo }));

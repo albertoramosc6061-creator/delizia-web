@@ -37,54 +37,62 @@ function logEvent(tipo, titulo, detalle, imgUrl) {
 //  SEED DATA
 // ─────────────────────────────────────────────────────────
 function seedDB() {
-  if (localStorage.getItem('dz_seeded_v3')) return;
+  if (localStorage.getItem('dz_seeded_v4')) return;
+  const sinDatos = k => !localStorage.getItem('dz_' + k);
 
-  DB.set('users', [
+  // Usuarios demo: se agregan sin borrar los que ya existen (clientes registrados desde el login)
+  const users = DB.get('users');
+  [
     { id:1, nombre:'Alexander Mendoza', usuario:'alexander@delizia.bo', password:'admin123', rol:'admin',    activo:true,  foto:null },
     { id:2, nombre:'Alan Flores',       usuario:'alan@delizia.bo',      password:'emp123',   rol:'empleado', activo:true,  foto:null },
     { id:3, nombre:'Patricia Soliz',    usuario:'paty@delizia.bo',      password:'paty123',  rol:'empleado', activo:true,  foto:null },
-  ]);
+  ].forEach(b => { if (!users.find(u => u.usuario === b.usuario)) users.push(b); });
+  DB.set('users', users);
 
-  DB.set('empleados', [
+  if (sinDatos('empleados')) DB.set('empleados', [
     { id:1, userId:2, nombre:'Alan Flores',    correo:'alan@delizia.bo',     telefono:'+591 77 100 200', cargo:'Ejecutivo de Ventas',    departamento:'Ventas',     activo:true, desde:'2021', foto:null },
     { id:2, userId:3, nombre:'Patricia Soliz', correo:'paty@delizia.bo',     telefono:'+591 70 300 400', cargo:'Jefa de Producción',     departamento:'Producción', activo:true, desde:'2019', foto:null },
     { id:3, userId:null, nombre:'Roberto Quispe', correo:'roberto@delizia.bo', telefono:'+591 68 500 600', cargo:'Coordinador Logístico', departamento:'Logística',  activo:true, desde:'2022', foto:null },
   ]);
 
-  DB.set('clientes', []); // Los clientes se registran solos
+  if (sinDatos('clientes')) DB.set('clientes', []); // Los clientes se registran solos
 
-  DB.set('proveedores', [
+  if (sinDatos('proveedores')) DB.set('proveedores', [
     { id:1, empresa:'Agrobol S.A.',    rubro:'Granos y cereales',  ciudad:'El Alto, La Paz',   telefono:'+591 2 234 5678', correo:'ventas@agrobol.bo',    pago:'Crédito 30 días', activo:true },
     { id:2, empresa:'Cacao Alto Beni', rubro:'Cacao premium',      ciudad:'Alto Beni, Beni',   telefono:'+591 3 456 7890', correo:'info@cacaoaltobeni.bo', pago:'Contado',         activo:true },
     { id:3, empresa:'Hierbas Andinas', rubro:'Hierbas aromáticas', ciudad:'Sucre, Chuquisaca', telefono:'+591 4 567 8901', correo:'hierbas@andinas.bo',    pago:'Crédito 15 días', activo:true },
   ]);
 
+  // Precio de venta a agencias, costo y vida útil son valores referenciales del equipo
   DB.set('productos', [
-    { id:1, nombre:'Leche Entera 1L',     precio:8.50,  stock:450, categoria:'Lácteos',  descripcion:'Leche entera pasteurizada, 100% natural. Sin aditivos.',    imgUrl:null },
-    { id:2, nombre:'Yogurt Natural 500ml',precio:12.00, stock:230, categoria:'Yogures',  descripcion:'Yogurt natural sin azúcar añadida, rico en probióticos.',    imgUrl:null },
-    { id:3, nombre:'Queso Fresco 400g',   precio:25.00, stock:80,  categoria:'Quesos',   descripcion:'Queso fresco artesanal elaborado con leche entera.',         imgUrl:null },
-    { id:4, nombre:'Mantequilla 250g',    precio:18.00, stock:120, categoria:'Derivados',descripcion:'Mantequilla cremosa sin sal, ideal para repostería.',        imgUrl:null },
-    { id:5, nombre:'Crema de Leche 200ml',precio:15.00, stock:95,  categoria:'Derivados',descripcion:'Crema de leche para cocina. 30% materia grasa.',            imgUrl:null },
-    { id:6, nombre:'Leche Chocolatada 200ml',precio:9.50,stock:310,categoria:'Lácteos',  descripcion:'Bebida láctea con cacao natural boliviano. Sin conservantes.',imgUrl:null },
+    { id:1, nombre:'Cono Tentación',           precio:3.50,  costo:1.80,  vidaUtil:180, stock:4200, categoria:'Helados', descripcion:'Helado de cono, línea impulsivos.',                 imgUrl:null },
+    { id:2, nombre:'Megacono',                 precio:5.00,  costo:2.60,  vidaUtil:180, stock:2600, categoria:'Helados', descripcion:'Helado de cono grande, línea impulsivos.',          imgUrl:null },
+    { id:3, nombre:'Bolo Delizia',             precio:1.00,  costo:0.45,  vidaUtil:180, stock:9000, categoria:'Helados', descripcion:'Bolo de fruta congelado.',                          imgUrl:null },
+    { id:4, nombre:'Yogurt familiar frutilla', precio:18.00, costo:10.50, vidaUtil:30,  stock:640,  categoria:'Lácteos', descripcion:'Yogurt sabor frutilla, presentación familiar.',     imgUrl:null },
+    { id:5, nombre:'Yogurt bebible durazno',   precio:6.00,  costo:3.40,  vidaUtil:25,  stock:1100, categoria:'Lácteos', descripcion:'Yogurt bebible sabor durazno.',                     imgUrl:null },
+    { id:6, nombre:'Ice Fruit Citrus Punch',   precio:3.00,  costo:1.50,  vidaUtil:30,  stock:3500, categoria:'Bebidas', descripcion:'Bebida refrigerada sabor citrus punch.',            imgUrl:null },
+    { id:7, nombre:'Néctar Frush durazno 2L',  precio:12.00, costo:7.00,  vidaUtil:90,  stock:800,  categoria:'Bebidas', descripcion:'Néctar de durazno, botella de 2 litros.',           imgUrl:null },
+    { id:8, nombre:'Té helado Bongo durazno 2L', precio:10.00, costo:5.80, vidaUtil:90, stock:700,  categoria:'Bebidas', descripcion:'Té helado sabor durazno, botella de 2 litros.',     imgUrl:null },
   ]);
 
   DB.set('categorias', [
-    { id:1, nombre:'Lácteos',   descripcion:'Leches y bebidas lácteas',   color:'var(--blue-400)' },
-    { id:2, nombre:'Yogures',   descripcion:'Yogures y postres lácteos',  color:'var(--red-400)' },
-    { id:3, nombre:'Quesos',    descripcion:'Quesos frescos y maduros',   color:'var(--cyan-300)' },
-    { id:4, nombre:'Derivados', descripcion:'Mantequilla, cremas y más',  color:'#66bb6a' },
+    { id:1, nombre:'Helados', descripcion:'Impulsivos, clásicos, bolos y conos', color:'var(--blue-400)' },
+    { id:2, nombre:'Lácteos', descripcion:'Leches, yogurts, cremas y postres',   color:'var(--red-400)' },
+    { id:3, nombre:'Bebidas', descripcion:'Ice Fruit, Néctar Frush, té helado',  color:'var(--cyan-300)' },
   ]);
 
   DB.set('pedidos', [
-    { id:1, orden:'ORD-0001', clienteId:null, cliente:'Demo Cliente', fecha:'20/10/2025', productos:'Leche Entera × 5, Yogurt × 3',    total:78.50,  estado:'Entregado' },
-    { id:2, orden:'ORD-0002', clienteId:null, cliente:'Demo Cliente', fecha:'21/10/2025', productos:'Queso Fresco × 2, Mantequilla × 1',total:68.00,  estado:'En proceso' },
+    { id:1, orden:'ORD-0001', clienteId:null, cliente:'Agencia Demo', fecha:'14/10/2026', productos:'Cono Tentación × 120, Bolo Delizia × 300', total:720.00, estado:'Entregado' },
+    { id:2, orden:'ORD-0002', clienteId:null, cliente:'Agencia Demo', fecha:'20/10/2026', productos:'Ice Fruit Citrus Punch × 200',             total:600.00, estado:'En proceso' },
   ]);
+
+  DB.set('planes', []);
 
   DB.set('bitacora', [
-    { id:1, tipo:'sistema', titulo:'Sistema inicializado', detalle:'Base de datos Delizia creada con datos de ejemplo.', imgUrl:null, fecha:'21/10/2025', hora:'08:00', usuario:'Sistema' },
+    { id:1, tipo:'sistema', titulo:'Sistema inicializado', detalle:'Base de datos Delizia creada con datos de ejemplo.', imgUrl:null, fecha:new Date().toLocaleDateString('es-BO'), hora:'08:00', usuario:'Sistema' },
   ]);
 
-  localStorage.setItem('dz_seeded_v3', '1');
+  localStorage.setItem('dz_seeded_v4', '1');
 }
 
 // ─────────────────────────────────────────────────────────
@@ -102,7 +110,7 @@ function logout() {
 // ─────────────────────────────────────────────────────────
 const SECTION_NAMES = {
   dashboard:'Dashboard', nosotros:'Sobre Delizia', bitacora:'Bitácora',
-  reportes:'Informes y Reportes',
+  reportes:'Informes y Reportes', planificacion:'Planificación de la producción',
   administrador:'Administradores', empleados:'Empleados',
   clientes:'Clientes', proveedores:'Proveedores',
   productos:'Productos', categorias:'Categorías', pedidos:'Pedidos',
@@ -129,6 +137,7 @@ function renderSection(id) {
     nosotros:        ()=>{},
     bitacora:        renderBitacora,
     reportes:        renderReportes,
+    planificacion:   renderPlanificacion,
     administrador:   renderAdmins,
     empleados:       renderEmpleados,
     clientes:        renderClientes,
@@ -178,18 +187,21 @@ function renderDashboard() {
 const BT_ICON_MAP = {
   producto:'#ico-product', cliente:'#ico-user', pedido:'#ico-order',
   empleado:'#ico-users',   proveedor:'#ico-supplier', sistema:'#ico-log',
+  planificacion:'#ico-tree',
 };
 const BT_IC_CLASS = {
   producto:'bt-ic-blue', cliente:'bt-ic-red', pedido:'bt-ic-green',
   empleado:'bt-ic-cyan', proveedor:'bt-ic-gray', sistema:'bt-ic-blue',
+  planificacion:'bt-ic-red',
 };
 const BT_TAG_CLASS = {
   producto:'bt-tag-prod',cliente:'bt-tag-cli',pedido:'bt-tag-ped',
-  empleado:'bt-tag-emp', proveedor:'bt-tag-prov',
+  empleado:'bt-tag-emp', proveedor:'bt-tag-prov', planificacion:'bt-tag-cli',
 };
 const BT_C = {
   producto:'var(--blue-400)',cliente:'var(--red-400)',pedido:'#4caf50',
   empleado:'var(--cyan-300)',proveedor:'#9c27b0',sistema:'var(--blue-300)',
+  planificacion:'var(--red-500)',
 };
 
 function renderBitacora() {
@@ -263,8 +275,8 @@ function renderReportes() {
     { label:'Entregado',  val:entr, color:'#4caf50' },
   ], total);
 
-  // Categorías más vendidas (por stock invertido)
-  const cats = ['Lácteos','Yogures','Quesos','Derivados'];
+  // Productos por categoría
+  const cats = DB.get('categorias').map(c => c.nombre);
   const catProds = cats.map(c => productos.filter(p=>p.categoria===c).length);
   const maxCat   = Math.max(...catProds, 1);
 
@@ -751,7 +763,7 @@ function renderCliInicio() {
   const mis = DB.get('pedidos').filter(p=>p.clienteId===session.id);
   const gasto = mis.reduce((s,p)=>s+p.total,0);
   const entr  = mis.filter(p=>p.estado==='Entregado').length;
-  const cliData = DB.get('clientes').find(c=>c.id===session.id);
+  const cliData = DB.get('clientes').find(c=>c.userId===session.id);
   animateValue('cliKpiPedidos', mis.length);
   const gEl = document.getElementById('cliKpiGasto');
   if (gEl) gEl.textContent = gasto.toFixed(0);
@@ -788,7 +800,7 @@ function renderCliPerfil() {
   if (!session) return;
   const card = document.getElementById('cliPerfilCard');
   if (!card) return;
-  const cliData = DB.get('clientes').find(c=>c.id===session.id);
+  const cliData = DB.get('clientes').find(c=>c.userId===session.id);
   card.innerHTML = `
     <div class="profile-big-av">${initials(session.nombre)}</div>
     <div>
@@ -963,15 +975,16 @@ function guardarCliente() {
   const tipo   = document.getElementById('cliTipo').value;
   const pass   = document.getElementById('cliPass').value;
   if (!nombre || !correo) { showToast('Completa nombre y correo', 'error'); return; }
-  const clis = DB.get('clientes');
-  const newId = DB.nextId('clientes');
-  clis.push({ id:newId, nombre, correo, telefono:tel, ciudad, tipo, totalCompras:0, activo:true });
-  DB.set('clientes', clis);
+  let userId = null;
   if (pass) {
     const users = DB.get('users');
-    users.push({ id:DB.nextId('users'), nombre, usuario:correo, password:pass, rol:'cliente', activo:true, foto:null });
+    userId = DB.nextId('users');
+    users.push({ id:userId, nombre, usuario:correo, password:pass, rol:'cliente', activo:true, foto:null });
     DB.set('users', users);
   }
+  const clis = DB.get('clientes');
+  clis.push({ id:DB.nextId('clientes'), userId, nombre, correo, telefono:tel, ciudad, tipo, totalCompras:0, activo:true });
+  DB.set('clientes', clis);
   logEvent('cliente', `Nuevo cliente creado por admin`, `${nombre} — ${tipo}`);
   closeModal(); renderClientes(); showToast('Cliente registrado', 'success');
 }
@@ -1078,7 +1091,7 @@ function guardarPedidoCliente() {
     productos:`${prod.nombre} × ${cant}${nota?' ('+nota+')':''}`, total, estado:'Pendiente' });
   DB.set('pedidos', pedidos);
   // Actualizar total compras cliente
-  const clis = DB.get('clientes'); const idx = clis.findIndex(c=>c.id===session.id);
+  const clis = DB.get('clientes'); const idx = clis.findIndex(c=>c.userId===session.id);
   if (idx>=0) { clis[idx].totalCompras = (clis[idx].totalCompras||0) + total; DB.set('clientes', clis); }
   logEvent('pedido', `Pedido de cliente`, `${session.nombre} — ${prod.nombre} × ${cant}`);
   closeModal(); renderCliPedidos(); renderCliInicio(); showToast('Pedido realizado con éxito!', 'success');
@@ -1246,7 +1259,7 @@ function showToast(msg, type='success') {
     document.head.appendChild(s);
   }
   const t=document.createElement('div');
-  t.style.cssText=`position:fixed;bottom:26px;right:26px;z-index:9999;background:${colors[type]};border:1px solid rgba(122,185,232,0.3);border-radius:14px;padding:13px 18px;font-family:'Poppins',sans-serif;font-size:13.5px;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px rgba(27,116,184,0.18);animation:toastIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;max-width:320px;`;
+  t.style.cssText=`position:fixed;bottom:26px;right:26px;z-index:9999;background:${colors[type]};border:1px solid rgba(122,185,232,0.3);border-radius:14px;padding:13px 18px;font-family:'Montserrat',sans-serif;font-size:13.5px;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px rgba(27,116,184,0.18);animation:toastIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;max-width:320px;`;
   t.innerHTML=`<span style="font-weight:800">${icons[type]}</span>${msg}`;
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.animation='toastOut 0.3s ease forwards'; setTimeout(()=>t.remove(),300); },3200);
