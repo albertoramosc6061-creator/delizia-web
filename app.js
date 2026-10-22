@@ -7,8 +7,10 @@
 
 // ─────────────────────────────────────────────────────────
 //  DB HELPERS
+//  Si firebase-db.js está cargado usa window.DB (Firestore)
+//  Si no, fallback a localStorage
 // ─────────────────────────────────────────────────────────
-const DB = {
+const DB = window.DB || {
   get:    k  => JSON.parse(localStorage.getItem('dz_' + k) || '[]'),
   set:    (k,v) => localStorage.setItem('dz_' + k, JSON.stringify(v)),
   nextId: k  => { const a = DB.get(k); return a.length ? Math.max(...a.map(i=>i.id))+1 : 1; }
@@ -38,6 +40,10 @@ function logEvent(tipo, titulo, detalle, imgUrl) {
 // ─────────────────────────────────────────────────────────
 function seedDB() {
   if (localStorage.getItem('dz_seeded_v3')) return;
+  if (DB.get('productos').length > 0 && DB.get('users').length > 0) {
+    localStorage.setItem('dz_seeded_v3', '1');
+    return;
+  }
 
   DB.set('users', [
     { id:1, nombre:'Alexander Mendoza', usuario:'alexander@delizia.bo', password:'admin123', rol:'admin',    activo:true,  foto:null },
@@ -120,7 +126,26 @@ function navigate(sectionId) {
   document.querySelectorAll(`[data-section="${sectionId}"]`).forEach(n => n.classList.add('active'));
   document.getElementById('breadcrumb').innerHTML = `Delizia <span>/ ${SECTION_NAMES[sectionId] || sectionId}</span>`;
   document.getElementById('sidebar').classList.remove('mobile-open');
-  renderSection(sectionId);
+  renderSection(sectionId); // Renderizar inmediatamente con datos en caché
+
+  // Sincronizar desde Firestore y re-renderizar con datos frescos
+  if (window.dzSyncKey) {
+    const _syncMap = {
+      clientes:'clientes',   'emp-clientes':'clientes',
+      empleados:'empleados', proveedores:'proveedores',
+      productos:'productos', 'emp-productos':'productos', 'cli-catalogo':'productos',
+      categorias:'categorias',
+      pedidos:'pedidos',     'emp-pedidos':'pedidos', 'cli-mispedidos':'pedidos',
+      bitacora:'bitacora',
+    };
+    const keys = sectionId === 'reportes'
+      ? ['pedidos','clientes','productos','empleados','proveedores']
+      : (_syncMap[sectionId] ? [_syncMap[sectionId]] : null);
+    if (keys) {
+      Promise.all(keys.map(k => window.dzSyncKey(k)))
+        .then(() => renderSection(sectionId));
+    }
+  }
 }
 
 function renderSection(id) {
@@ -1277,7 +1302,12 @@ function initials(str) {
 // ─────────────────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', async ()=>{
+  // Esperar a que Firebase cargue todos los datos antes de iniciar
+  if (window.dzReady) {
+    try { await window.dzReady; } catch(e) { console.warn('[Delizia] Firebase no disponible, usando datos locales'); }
+  }
+
   seedDB();
 
   const raw = sessionStorage.getItem('dz_session');
@@ -1320,3 +1350,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   setTimeout(()=>showToast(`Bienvenido, ${session.nombre.split(' ')[0]}`, 'info'), 600);
 });
+
